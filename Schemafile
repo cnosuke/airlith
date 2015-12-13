@@ -1,0 +1,48 @@
+create_table "faqs", force: :cascade do |t|
+  t.integer  "room_id",      limit: 4,     null: false
+  t.datetime "published_at"
+  t.datetime "created_at",                 null: false
+  t.datetime "updated_at",                 null: false
+  t.text     "question_ja",  limit: 65535
+  t.text     "question_en",  limit: 65535
+  t.text     "answer_ja",    limit: 65535
+  t.text     "answer_en",    limit: 65535
+end
+
+add_index "faqs", ["room_id", "published_at"], name: "idx_room_id_and_published_at", using: :btree
+
+create_table "reservations", force: :cascade do |t|
+  t.integer  "room_id",     limit: 4, null: false
+  t.integer  "guest_id",    limit: 4, null: false
+  t.datetime "reserved_at",           null: false
+  t.datetime "created_at",            null: false
+  t.datetime "updated_at",            null: false
+end
+
+add_index "reservations", ["guest_id", "reserved_at"], name: "idx_guest_id_and_reserved_at", using: :btree
+add_index "reservations", ["room_id", "reserved_at"], name: "idx_room_id_and_reserved_at", using: :btree
+
+create_table "rooms", force: :cascade do |t|
+  t.integer  "owner_id",    limit: 4,     null: false
+  t.string   "country",     limit: 2,     null: false
+  t.string   "zipcode",     limit: 16,    null: false
+  t.string   "address",     limit: 1024,  null: false
+  t.string   "name",        limit: 256,   null: false
+  t.text     "description", limit: 65535
+  t.datetime "created_at",                null: false
+  t.datetime "updated_at",                null: false
+end
+
+add_index "rooms", ["owner_id"], name: "idx_owner_id", using: :btree
+
+create_table "users", force: :cascade do |t|
+  t.string   "name",       limit: 64
+  t.string   "email",      limit: 128
+  t.string   "avatar_url", limit: 256
+  t.string   "provider",   limit: 32,  default: "", null: false
+  t.string   "uid",        limit: 128, default: "", null: false
+  t.datetime "created_at",                          null: false
+  t.datetime "updated_at",                          null: false
+end
+
+add_index "users", ["uid"], name: "idx_uid", using: :btree
