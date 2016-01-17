@@ -1,0 +1,21 @@
+.mdl-layout__header-row.mdl-shadow--2dp
+  = link_to root_path do
+    %h1.mdl-layout-title #{global_site_title}
+  -# Add spacer, to align navigation to the right
+  .mdl-layout-spacer
+  -# Navigation
+  %nav.mdl-navigation
+    - if current_user
+      = link_to "#{current_user.name} さん", edit_user_registration_path, class: "mdl-navigation__link"
+      - if current_user.owner?
+        = link_to "Owner Panel", owner_path, class: "mdl-navigation__link"
+      - if current_user.admin?
+        = link_to "Admin Page", admin_path, class: "mdl-navigation__link"
+    - else
+      = link_to 'Login', new_user_session_path, class: "mdl-navigation__link"
+
+-# .mdl-layout__drawer
+-#   %span.mdl-layout-title TitleB
+-#   %nav.mdl-navigation
+-#     - 4.times do
+-#       = link_to 'LinkB', '#', class: "mdl-navigation__link"

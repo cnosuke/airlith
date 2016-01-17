@@ -1,4 +1,8 @@
 class Room < ActiveRecord::Base
+  COUNTRIES = [
+    %w(Japan JP)
+  ].freeze
+
   validates *%i(country zipcode address name), presence: true
 
   has_many :faq

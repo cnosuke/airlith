@@ -25,10 +25,12 @@ gem 'sass-rails'
 gem 'therubyracer'
 gem 'uglifier'
 gem 'unicorn'
+gem 'carrierwave'
 
 gem 'ridgepole'
 
 group :development, :test do
+  gem "view_source_map"
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
@@ -47,4 +49,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'timecop'
   gem 'rack_session_access'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'erb2haml' # Convert erb to haml
 end

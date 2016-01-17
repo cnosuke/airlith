@@ -1,0 +1,47 @@
+!!!
+%html{ "xmlns:og": "http://ogp.me/ns#", "xmlns:fb": "http://www.facebook.com/2008/fbml" }
+  %head
+    %meta{ charset: "utf-8" }
+    %meta{ "http-equiv": "X-UA-Compatible", content: "IE=edge" }
+    %meta{ content: 'ここにdescriptionを書く', name: "description" }
+    %meta{ content: 'ここにkeywordsを書く', name: "keywords" }
+    %meta{ content: "width=device-width, initial-scale=1.0", name: "viewport" }
+
+    %title
+      = yield :title
+    = favicon
+    = stylesheet_link_tag "application"
+    = content_for(:css)
+    = javascript_include_tag "application", debug: false
+    = csrf_meta_tags
+    = content_for(:head)
+    = content_for(:js)
+    = content_for(:canonical)
+
+    - # Material Design http://www.getmdl.io/started/index.html
+    = stylesheet_link_tag "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue-amber.min.css"
+    = javascript_include_tag "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"
+    = stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons"
+
+  %body
+    = render "layouts/google_analytics"
+    #wrapper.layout-transparent.mdl-layout.mdl-js-layout
+      %header.mdl-layout__header.mdl-layout__header--transparent
+        = render "layouts/header"
+
+      %main.mdl-layout__content
+        #content
+          = render "layouts/user_info"
+          - if notice
+            .notice
+              .card-wide.mdl-card.mdl-shadow--2dp
+                .mdl-card__title
+                  %h3.mdl-card__title-text Notice
+                .mdl-card__supporting-text
+                  = notice
+          %p.alert
+
+          = yield
+
+      #footer
+        = render "layouts/footer"

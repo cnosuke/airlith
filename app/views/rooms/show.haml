@@ -1,0 +1,52 @@
+
+-# = link_to 'create', new_room_path
+-# = link_to 'edit', edit_room_path(@room)
+-# = link_to 'delete', room_path(@room), method: :delete
+
+.mdl-grid
+  .mdl-cell.mdl-cell--4-col
+    %h2
+      = @room.name
+
+
+  .mdl-cell.mdl-cell--8-col
+    .mdl-grid
+      .mdl-cell.mdl-cell--8-col
+        .address_and_zipcode
+          .zipcode
+            #{@room.zipcode} (#{@room.country})
+          .address
+            = @room.address
+
+      .mdl-cell.mdl-cell--8-col
+        = simple_format(@room.description)
+
+
+  .mdl-cell.mdl-cell--12-col
+    %h3 FAQ (#{@room.faq.size})
+    - @room.faq.each do |f|
+      .mdl-grid
+        .mdl-cell.mdl-cell--6-col
+          %h4 Q(ja)
+          %p= f.question_ja
+        .mdl-cell.mdl-cell--6-col
+          %h4 A(ja)
+          %p= f.answer_ja
+      .mdl-grid
+        .mdl-cell.mdl-cell--6-col
+          %h4 Q(en)
+          %p= f.question_en
+        .mdl-cell.mdl-cell--6-col
+          %h4 A(en)
+          %p= f.answer_en
+      - if current_user.try(:can_edit?, @room)
+        .mdl-grid
+          .mdl-cell.mdl-cell--12-col
+            = link_to 'delete', [@room, f], method: :delete
+
+- if current_user.try(:can_edit?, @room)
+  .mdl-grid
+    .mdl-cell.mdl-cell--4-col
+      %h2 Add FAQ
+    .mdl-cell.mdl-cell--8-col
+      = render 'faqs/form', room: @room, faq: @room.faq.build

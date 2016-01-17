@@ -1,0 +1,46 @@
+.mdl-grid
+  .mdl-cell.mdl-cell--6-col
+    %h2
+      Edit #{resource_name.to_s.humanize}
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      .mdl-cell.mdl-cell--6-col
+        = devise_error_messages!
+        .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.email_field :email, autofocus: true, class: "mdl-textfield__input"
+          = f.label :email, class: "mdl-textfield__label"
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+        .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.password_field :password, autocomplete: "off", class: "mdl-textfield__input"
+          = f.label :password, class: "mdl-textfield__label"
+          %i (leave blank if you don't want to change it)
+
+        .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.password_field :password_confirmation, autocomplete: "off", class: "mdl-textfield__input"
+          = f.label :password_confirmation, class: "mdl-textfield__label"
+
+        .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.password_field :current_password, autocomplete: "off", class: "mdl-textfield__input"
+          = f.label :current_password, class: "mdl-textfield__label"
+          %i (we need your current password to confirm your changes)
+
+      .mdl-cell.mdl-cell--6-col
+        .actions
+          = f.submit "Update", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+
+      .mdl-cell.mdl-cell--6-col
+        = link_to "Back", :back, class: "mdl-button mdl-js-button mdl-button--primary"
+
+    .mdl-cell.mdl-cell--6-col
+      = link_to 'Sign out', destroy_user_session_path, class: "mdl-button mdl-js-button mdl-button--primary", method: :delete
+
+    %hr
+
+    .mdl-cell.mdl-cell--6-col
+      %p
+        If you want to delete the account,
+      = button_to "Cancel my account",
+        registration_path(resource_name), data: { confirm: "Are you sure?" },     method: :delete, class: "mdl-button mdl-js-button mdl-js-ripple-effect"

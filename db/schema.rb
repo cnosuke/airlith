@@ -1,0 +1,75 @@
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 0) do
+
+  create_table "faqs", force: :cascade do |t|
+    t.integer  "room_id",      limit: 4,     null: false
+    t.datetime "published_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.text     "question_ja",  limit: 65535
+    t.text     "question_en",  limit: 65535
+    t.text     "answer_ja",    limit: 65535
+    t.text     "answer_en",    limit: 65535
+  end
+
+  add_index "faqs", ["room_id", "published_at"], name: "idx_room_id_and_published_at", using: :btree
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "room_id",     limit: 4, null: false
+    t.integer  "guest_id",    limit: 4, null: false
+    t.datetime "reserved_at",           null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "reservations", ["guest_id", "reserved_at"], name: "idx_guest_id_and_reserved_at", using: :btree
+  add_index "reservations", ["room_id", "reserved_at"], name: "idx_room_id_and_reserved_at", using: :btree
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer  "owner_id",    limit: 4,     null: false
+    t.string   "country",     limit: 2,     null: false
+    t.string   "zipcode",     limit: 16,    null: false
+    t.string   "address",     limit: 1024,  null: false
+    t.string   "name",        limit: 256,   null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "rooms", ["owner_id"], name: "idx_owner_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                   limit: 64
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "confirmation_token",     limit: 255
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.boolean  "owner",                              default: false, null: false
+    t.string   "email",                  limit: 255, default: "",    null: false
+  end
+
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+
+end

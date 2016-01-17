@@ -1,0 +1,7 @@
+%ul
+  - @rooms.each do |room|
+    %li
+    = link_to room do
+      = room.name
+      = room.id
+      = room.description

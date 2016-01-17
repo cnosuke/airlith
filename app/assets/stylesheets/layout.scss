@@ -1,0 +1,52 @@
+.layout-transparent {
+
+}
+.layout-transparent .mdl-layout__header,
+.layout-transparent .mdl-layout__drawer-button {
+  .mdl-layout__header-row {
+    background: image-url('layouts/tokyo.jpg') center / cover;
+    color: white;
+    height: 100px;
+
+    a {
+      text-decoration:none;
+    }
+
+    .mdl-layout-title {
+      color: #fff;
+      text-shadow: 0px 0px 6px #000;
+      // font-size: 200%;
+      // font-weight: bolder;
+    }
+  }
+}
+
+h2, h3 {
+  color: #666;
+}
+
+
+.notice {
+  .card-wide.mdl-card {
+    width: 512px;
+    min-height: 80px;
+    margin: 20px auto;
+  }
+  .card-wide > .mdl-card__title {
+    color: #666;
+  }
+}
+
+.room-card {
+  h4 {
+    margin: 5px 0;
+  }
+  .address {
+    margin-bottom: 10px;
+    p {
+      line-height: 1.2em;
+      padding: 0;
+      margin: 5px 0;
+    }
+  }
+}

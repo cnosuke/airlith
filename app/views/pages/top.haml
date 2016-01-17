@@ -1,0 +1,15 @@
+- title 'TopPage'
+
+.mdl-grid
+  .mdl-cell.mdl-cell--12-col
+    %h2 Welcome
+
+    - if current_user
+      = link_to 'Go to My Page', my_path, class: "mdl-button mdl-js-button mdl-button--primary"
+      - if current_user.owner?
+        = link_to "Go to Owner Panel", owner_path, class: "mdl-button mdl-js-button mdl-button--primary"
+      - if current_user.admin?
+        = link_to "Go to Admin Page", admin_path, class: "mdl-button mdl-js-button mdl-button--primary"
+
+    - else
+      = link_to 'Login', new_user_session_path, class: "mdl-button mdl-js-button mdl-button--primary"

@@ -1,0 +1,32 @@
+.mdl-grid
+  = form_for([room, faq]) do |f|
+    .mdl-cell.mdl-cell--12-col
+      - if faq.errors.any?
+        .errors
+          = pluralize(faq.errors.count, "error")
+          %ul
+            - faq.errors.full_messages.each do |ms|
+              %li
+                = ms
+      .mdl-grid
+        .mdl-cell.mdl-cell--6-col
+          .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            = f.label 'Question (ja)', class: "mdl-textfield__label"
+            = f.text_area :question_ja, class: "mdl-textfield__input", rows: 15
+        .mdl-cell.mdl-cell--6-col
+          .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            = f.label 'Answer (ja)', class: "mdl-textfield__label"
+            = f.text_area :answer_ja, class: "mdl-textfield__input", rows: 15
+
+      .mdl-grid
+        .mdl-cell.mdl-cell--6-col
+          .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            = f.label 'Question (en)', class: "mdl-textfield__label"
+            = f.text_area :question_en, class: "mdl-textfield__input", rows: 15
+        .mdl-cell.mdl-cell--6-col
+          .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            = f.label 'Answer (en)', class: "mdl-textfield__label"
+            = f.text_area :answer_en, class: "mdl-textfield__input", rows: 15
+
+    .mdl-cell.mdl-cell--12-col
+      = f.submit class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"

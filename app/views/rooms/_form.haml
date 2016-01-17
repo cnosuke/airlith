@@ -1,0 +1,32 @@
+.mdl-grid
+  = form_for(@room) do |f|
+    .mdl-cell.mdl-cell--8-col
+      - if @room.errors.any?
+        .errors
+          = pluralize(@room.errors.count, "error")
+          %ul
+            - @room.errors.full_messages.each do |ms|
+              %li
+                = ms
+      .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.label :name, class: "mdl-textfield__label"
+        = f.text_field :name, class: "mdl-textfield__input"
+
+      .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.label :country
+        = f.select :country, options_for_select(Room::COUNTRIES)
+
+      .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.label :zipcode, class: "mdl-textfield__label"
+        = f.text_field :zipcode, class: "mdl-textfield__input"
+
+      .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.label :address, class: "mdl-textfield__label"
+        = f.text_area :address, class: "mdl-textfield__input", rows: 5
+
+      .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.label :description, class: "mdl-textfield__label"
+        = f.text_area :description, class: "mdl-textfield__input", rows: 15
+
+    .mdl-cell.mdl-cell--8-col
+      = f.submit class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"

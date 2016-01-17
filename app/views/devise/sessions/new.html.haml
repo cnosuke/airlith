@@ -1,0 +1,22 @@
+.mdl-grid
+  .mdl-cell.mdl-cell--6-col
+    %h2 Log in
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .mdl-cell.mdl-cell--6-col
+        .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.label :email, class: "mdl-textfield__label"
+          = f.email_field :email, autofocus: true, class: "mdl-textfield__input"
+        .field.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.label :password, class: "mdl-textfield__label"
+          = f.password_field :password, autocomplete: "off", class: "mdl-textfield__input"
+        - if devise_mapping.rememberable?
+          .field.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect
+            = f.check_box :remember_me, class: "mdl-checkbox__input", checked: true
+            = f.label :remember_me, class: "mdl-checkbox__label"
+
+      .mdl-cell.mdl-cell--6-col
+        .actions
+          = f.submit "Log in", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+      .mdl-cell.mdl-cell--6-col
+        = render "devise/shared/links"
