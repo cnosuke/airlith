@@ -1,4 +1,4 @@
-FROM cnosuke/ruby22-base
+FROM cnosuke/ruby23-base
 MAINTAINER shinnosuke@gmail.com
 
 RUN apt-get update
